@@ -1,0 +1,16 @@
+.vs
+
+TestWeb/bin
+
+TestWeb/obj
+
+Tools/bin
+
+Tools/obj
+
+DataSync/bin
+
+DataSync/obj
+
+DataSync/App.config
+DataSync.suo
