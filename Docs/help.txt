@@ -1,0 +1,5 @@
+D:\Tools\MongoDB\bin\data
+
+D:
+cd D:\Tools\MongoDB\bin
+mongod --logpath  D:\Tools\MongoDB\bin\logo\mongodb.log --logappend --dbpath D:\Tools\MongoDB\bin\data
