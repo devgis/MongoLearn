@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using MongoDB.Driver;
+using System;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using MongoDB.Driver;
-using MongoRepository;
 
 namespace MongoTest
 {
@@ -25,7 +19,15 @@ namespace MongoTest
             var client = new MongoClient(con);
             var database = client.GetServer().GetDatabase(dbname);
             var collects =database.GetCollection("Customer");
+
+            var collects2 = database.GetCollection("Customer2");
             var list=collects.FindAll().ToList();
+            
+            foreach (var item in list)
+            { collects2.Insert(item); }
+
+            MessageBox.Show("Done!");
+
 
             //var repo = new MongoRepository<Customer>();
 
