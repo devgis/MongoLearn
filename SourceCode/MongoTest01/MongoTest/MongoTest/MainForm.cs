@@ -18,6 +18,10 @@ namespace MongoTest
 
             var client = new MongoClient(con);
             var database = client.GetServer().GetDatabase(dbname);
+
+            string names = string.Join("\r\n", database.GetCollectionNames());
+            MessageBox.Show(names);
+
             var collects =database.GetCollection("Customer");
 
             var collects2 = database.GetCollection("Customer2");
