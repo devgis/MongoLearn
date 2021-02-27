@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MongoTest")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("MongoTool")]
+[assembly: AssemblyDescription("Mongo數據同步工具 www.devgis.com")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MongoTest")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("DEVGIS")]
+[assembly: AssemblyProduct("MongoTool")]
+[assembly: AssemblyCopyright("Copyright ©  DEVGIS 2021")]
+[assembly: AssemblyTrademark("DEVGIS")]
 [assembly: AssemblyCulture("")]
 
 //将 ComVisible 设置为 false 将使此程序集中的类型

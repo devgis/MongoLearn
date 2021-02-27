@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btTest1 = new System.Windows.Forms.Button();
             this.dgvDocuments = new System.Windows.Forms.DataGridView();
+            this.CSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.CDocumentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btTest2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -40,16 +42,13 @@
             this.btReadDocs = new System.Windows.Forms.Button();
             this.btSync = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tbConStr1 = new System.Windows.Forms.TextBox();
+            this.tbConStr2 = new System.Windows.Forms.TextBox();
+            this.tbDBName1 = new System.Windows.Forms.TextBox();
+            this.tbDBName2 = new System.Windows.Forms.TextBox();
+            this.tbLogs = new System.Windows.Forms.TextBox();
             this.btSelectAll = new System.Windows.Forms.Button();
             this.btDisselectAll = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.CSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.CDocumentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +62,7 @@
             this.btTest1.TabIndex = 0;
             this.btTest1.Text = "测试";
             this.btTest1.UseVisualStyleBackColor = true;
+            this.btTest1.Click += new System.EventHandler(this.btTest1_Click);
             // 
             // dgvDocuments
             // 
@@ -75,11 +75,26 @@
             this.dgvDocuments.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDocuments.Location = new System.Drawing.Point(63, 73);
             this.dgvDocuments.Name = "dgvDocuments";
-            this.dgvDocuments.ReadOnly = true;
             this.tableLayoutPanel1.SetRowSpan(this.dgvDocuments, 4);
             this.dgvDocuments.RowTemplate.Height = 23;
             this.dgvDocuments.Size = new System.Drawing.Size(535, 284);
             this.dgvDocuments.TabIndex = 1;
+            // 
+            // CSelect
+            // 
+            this.CSelect.FalseValue = "false";
+            this.CSelect.HeaderText = "選擇";
+            this.CSelect.Name = "CSelect";
+            this.CSelect.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CSelect.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.CSelect.TrueValue = "true";
+            // 
+            // CDocumentName
+            // 
+            this.CDocumentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CDocumentName.HeaderText = "數據表";
+            this.CDocumentName.Name = "CDocumentName";
+            this.CDocumentName.ReadOnly = true;
             // 
             // tableLayoutPanel1
             // 
@@ -99,11 +114,11 @@
             this.tableLayoutPanel1.Controls.Add(this.btReadDocs, 3, 7);
             this.tableLayoutPanel1.Controls.Add(this.btSync, 4, 7);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBox3, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox4, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.textBox5, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.tbConStr1, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbConStr2, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbDBName1, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbDBName2, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tbLogs, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.btSelectAll, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.btDisselectAll, 2, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -133,6 +148,7 @@
             this.btTest2.TabIndex = 2;
             this.btTest2.Text = "测试";
             this.btTest2.UseVisualStyleBackColor = true;
+            this.btTest2.Click += new System.EventHandler(this.btTest2_Click);
             // 
             // label1
             // 
@@ -179,6 +195,7 @@
             this.btReadDocs.TabIndex = 7;
             this.btReadDocs.Text = "讀取Documents";
             this.btReadDocs.UseVisualStyleBackColor = true;
+            this.btReadDocs.Click += new System.EventHandler(this.btReadDocs_Click);
             // 
             // btSync
             // 
@@ -189,6 +206,7 @@
             this.btSync.TabIndex = 8;
             this.btSync.Text = "同步";
             this.btSync.UseVisualStyleBackColor = true;
+            this.btSync.Click += new System.EventHandler(this.btSync_Click);
             // 
             // label5
             // 
@@ -199,45 +217,49 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "文檔列表";
             // 
-            // textBox1
+            // tbConStr1
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(63, 8);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(535, 21);
-            this.textBox1.TabIndex = 10;
+            this.tbConStr1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbConStr1.Location = new System.Drawing.Point(63, 8);
+            this.tbConStr1.Name = "tbConStr1";
+            this.tbConStr1.Size = new System.Drawing.Size(535, 21);
+            this.tbConStr1.TabIndex = 10;
             // 
-            // textBox2
+            // tbConStr2
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(63, 38);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(535, 21);
-            this.textBox2.TabIndex = 11;
+            this.tbConStr2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbConStr2.Location = new System.Drawing.Point(63, 38);
+            this.tbConStr2.Name = "tbConStr2";
+            this.tbConStr2.Size = new System.Drawing.Size(535, 21);
+            this.tbConStr2.TabIndex = 11;
             // 
-            // textBox3
+            // tbDBName1
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(664, 8);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(94, 21);
-            this.textBox3.TabIndex = 12;
+            this.tbDBName1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDBName1.Location = new System.Drawing.Point(664, 8);
+            this.tbDBName1.Name = "tbDBName1";
+            this.tbDBName1.Size = new System.Drawing.Size(94, 21);
+            this.tbDBName1.TabIndex = 12;
             // 
-            // textBox4
+            // tbDBName2
             // 
-            this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(664, 38);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(94, 21);
-            this.textBox4.TabIndex = 13;
+            this.tbDBName2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDBName2.Location = new System.Drawing.Point(664, 38);
+            this.tbDBName2.Name = "tbDBName2";
+            this.tbDBName2.Size = new System.Drawing.Size(94, 21);
+            this.tbDBName2.TabIndex = 13;
             // 
-            // comboBox1
+            // tbLogs
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(707, 0);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(8, 20);
-            this.comboBox1.TabIndex = 3;
+            this.tableLayoutPanel1.SetColumnSpan(this.tbLogs, 5);
+            this.tbLogs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbLogs.Location = new System.Drawing.Point(3, 368);
+            this.tbLogs.Multiline = true;
+            this.tbLogs.Name = "tbLogs";
+            this.tbLogs.ReadOnly = true;
+            this.tbLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbLogs.Size = new System.Drawing.Size(855, 175);
+            this.tbLogs.TabIndex = 16;
             // 
             // btSelectAll
             // 
@@ -248,6 +270,7 @@
             this.btSelectAll.TabIndex = 14;
             this.btSelectAll.Text = "全選";
             this.btSelectAll.UseVisualStyleBackColor = true;
+            this.btSelectAll.Click += new System.EventHandler(this.btSelectAll_Click);
             // 
             // btDisselectAll
             // 
@@ -258,48 +281,20 @@
             this.btDisselectAll.TabIndex = 15;
             this.btDisselectAll.Text = "全取";
             this.btDisselectAll.UseVisualStyleBackColor = true;
-            // 
-            // textBox5
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.textBox5, 5);
-            this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox5.Location = new System.Drawing.Point(3, 368);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox5.Size = new System.Drawing.Size(855, 175);
-            this.textBox5.TabIndex = 16;
-            // 
-            // CSelect
-            // 
-            this.CSelect.FalseValue = "false";
-            this.CSelect.HeaderText = "選擇";
-            this.CSelect.Name = "CSelect";
-            this.CSelect.ReadOnly = true;
-            this.CSelect.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.CSelect.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.CSelect.TrueValue = "true";
-            // 
-            // CDocumentName
-            // 
-            this.CDocumentName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CDocumentName.HeaderText = "數據表";
-            this.CDocumentName.Name = "CDocumentName";
-            this.CDocumentName.ReadOnly = true;
+            this.btDisselectAll.Click += new System.EventHandler(this.btDisselectAll_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(861, 551);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mongo同步工具";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocuments)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -321,14 +316,13 @@
         private System.Windows.Forms.Button btReadDocs;
         private System.Windows.Forms.Button btSync;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox tbConStr1;
+        private System.Windows.Forms.TextBox tbConStr2;
+        private System.Windows.Forms.TextBox tbDBName1;
+        private System.Windows.Forms.TextBox tbDBName2;
         private System.Windows.Forms.Button btSelectAll;
         private System.Windows.Forms.Button btDisselectAll;
-        public System.Windows.Forms.TextBox textBox5;
+        public System.Windows.Forms.TextBox tbLogs;
         private System.Windows.Forms.DataGridViewCheckBoxColumn CSelect;
         private System.Windows.Forms.DataGridViewTextBoxColumn CDocumentName;
     }
