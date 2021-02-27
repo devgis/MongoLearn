@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
-namespace MongoTest
+namespace MongoTool
 {
     public class MessageHelper
     {
         private static string MessageTitle = "System";
+        static MessageHelper()
+        {
+            MessageTitle = Assembly.GetCallingAssembly().GetName().Name;
+        }
 
         /// <summary>
         /// Show a error message

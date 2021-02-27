@@ -1,4 +1,4 @@
-﻿namespace MongoTest
+﻿namespace MongoTool
 {
     partial class MainForm
     {
